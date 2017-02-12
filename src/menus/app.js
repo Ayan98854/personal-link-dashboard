@@ -14,7 +14,7 @@ export var vue_app = new Vue({
         "url": "http://drive.google.com"
     }],
     iframeUrl: '',
-    visibility: 'all'
+    iframeHeight: 0
   },
 
   // methods that implement data logic.
@@ -23,6 +23,12 @@ export var vue_app = new Vue({
     abrirMenu: function (menu) {
         console.log(menu.url);
         this.iframeUrl = menu.url;
+
+
+        this.iframeHeight = (($(window).height() - $(".navbar-static-top").outerHeight()) );
+
+        console.log(this.iframeHeight);
+
     },
 
     removeTodo: function (todo) {
