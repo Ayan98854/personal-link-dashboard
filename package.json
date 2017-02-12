@@ -1,15 +1,14 @@
 {
-  "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application",
+  "name": "person-link-dashboard",
+  "productName": "Personal Link Dashboard",
+  "description": "Set links and access all from one place",
   "version": "0.0.0",
-  "author": "Mr. Gumby <mr.gumby@example.com>",
-  "copyright": "© 2016, Gumby inc.",
-  "homepage": "http://example.com",
+  "author": "Jonas OF <contato@jonasof.com.br>",
+  "copyright": "© 2017 Jonas OF",
   "license": "MIT",
   "main": "app/background.js",
   "build": {
-    "appId": "com.example.electron-boilerplate",
+    "appId": "br.com.jonasof.personallinkdashboard",
     "files": [
       "app/**/*",
       "node_modules/**/*",
