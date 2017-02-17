@@ -2,6 +2,13 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap-theme.css";
 @import "../../node_modules/sb-admin-2/dist/css/sb-admin-2.css";
 
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+
+
 body {
     overflow: hidden;
+}
+
+.navbar-brand {
+    width: 250px;
 }

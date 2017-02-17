@@ -13,62 +13,45 @@ export var vue_app = new Vue({
         "icone": "",
         "url": "http://drive.google.com"
     }],
+    open_menus: [{
+        "nome": "homepage",
+        "titulo": "Homepage",
+        "icone": "",
+        "url": "homepage.html"
+    }],
     iframeUrl: '',
-    iframeHeight: 0
+    iframeHeight: 0,
   },
 
   // methods that implement data logic.
   // note there's no DOM manipulation here at all.
   methods: {
     abrirMenu: function (menu) {
-        console.log(menu.url);
-        this.iframeUrl = menu.url;
 
+        var els = this.open_menus.filter(function(el) {
+            console.log(menu);
+            return el.nome === menu.nome;
+        });
 
-        this.iframeHeight = (($(window).height() - $(".navbar-static-top").outerHeight()) );
+        if (els.length == 0) {
+            this.open_menus.push(menu);
+            this.iframeHeight = (($(window).height() - $(".navbar-static-top").outerHeight()) );
+        }
 
-        console.log(this.iframeHeight);
-
+        Vue.nextTick(function () {
+              $('.nav-tabs a[href="#' + menu.nome + '"]').tab('show');
+        });
     },
 
-    removeTodo: function (todo) {
-      this.todos.splice(this.todos.indexOf(todo), 1)
-    },
-
-    editTodo: function (todo) {
-      this.beforeEditCache = todo.title
-      this.editedTodo = todo
-    },
-
-    doneEdit: function (todo) {
-      if (!this.editedTodo) {
-        return
-      }
-      this.editedTodo = null
-      todo.title = todo.title.trim()
-      if (!todo.title) {
-        this.removeTodo(todo)
-      }
-    },
-
-    cancelEdit: function (todo) {
-      this.editedTodo = null
-      todo.title = this.beforeEditCache
-    },
-
-    removeCompleted: function () {
-      this.todos = filters.active(this.todos)
+    fecharMenu: function(menu) {
+        var self = this;
+        this.open_menus.map(function(el, index) {
+            if (el.nome === menu.nome) {
+                self.open_menus.splice(index, 1);
+            }
+        });
     }
-  },
 
-  // a custom directive to wait for the DOM to be updated
-  // before focusing on the input field.
-  // http://vuejs.org/guide/custom-directive.html
-  directives: {
-    'todo-focus': function (el, value) {
-      if (value) {
-        el.focus()
-      }
-    }
   }
-})
+
+});

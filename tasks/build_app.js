@@ -12,6 +12,7 @@ var utils = require('./utils');
 var projectDir = jetpack;
 var srcDir = jetpack.cwd('./src');
 var destDir = jetpack.cwd('./app');
+var nodeDir = jetpack.cwd('./node_modules');
 
 gulp.task('bundle', function () {
     return Promise.all([
@@ -25,6 +26,11 @@ gulp.task('scss', function () {
         .pipe(plumber())
         .pipe(sass())
         .pipe(gulp.dest(destDir.path('stylesheets')));
+});
+
+gulp.task('libs', function () {
+    return gulp.src(nodeDir.path('font-awesome/fonts/**.*'))
+        .pipe(gulp.dest(destDir.path('fonts')));
 });
 
 gulp.task('environment', function () {
@@ -50,4 +56,4 @@ gulp.task('watch', function () {
     }));
 });
 
-gulp.task('build', ['bundle', 'scss', 'environment']);
+gulp.task('build', ['bundle', 'scss', 'libs', 'environment']);
