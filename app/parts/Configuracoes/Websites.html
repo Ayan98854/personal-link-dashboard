@@ -1,0 +1,51 @@
+<div>
+    <h2>Websites</h2>
+
+    <p>
+        <a class='btn btn-primary' ng-click='openNewWebsite()'>New Website</a>
+    </p>
+
+    <table class="table table-default">
+        <th>
+            <td>Name</td>
+            <td>Title</td>
+            <td>Icon</td>
+            <td>URL</td>
+            <td>Action</td>
+        </th>
+            <tr ng-repeat="website in websites">
+                <td>
+                    {{website.name}}
+                </td>
+                <td>
+                    {{website.title}}
+                </td>
+                <td>
+                    {{website.icon}}
+                </td>
+                <td>
+                    {{website.url}}
+                </td>
+                <td>
+                    <a class="btn btn-primary" ng-click="openWebsite(website)"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" ng-click="removeWebsite(website)"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form ng-if="current_website !== false">
+        <p>Name: <input ng-model="current_website.name" class="form-control"></p>
+        <p>Title: <input ng-model="current_website.title" class="form-control"></p>
+        <p>Icon: <input ng-model="current_website.icon" class="form-control"></p>
+        <p>Url: <input ng-model="current_website.url" class="form-control"></p>
+
+      <hr/>
+      <div id="actions" class="row">
+        <div class="col-md-12">
+          <a class="btn btn-primary" ng-click="saveWebsite()">Salvar</a>
+          <a href="index.html" class="btn btn-default" ng-click="current_website = false">Cancelar</a>
+        </div>
+      </div>
+    </form>
+</div>

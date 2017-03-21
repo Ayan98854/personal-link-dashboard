@@ -1,0 +1,16 @@
+<div>
+    <h2>General</h2>
+
+    <p><input ng-model="current_website.name" class="form-control"></p>
+    <p>Title: <input ng-model="current_website.title" class="form-control"></p>
+    <p>Icon: <input ng-model="current_website.icon" class="form-control"></p>
+    <p>Url: <input ng-model="current_website.url" class="form-control"></p>
+
+  <hr/>
+  <div id="actions" class="row">
+    <div class="col-md-12">
+      <a class="btn btn-primary" ng-click="saveWebsite()">Salvar</a>
+      <a href="index.html" class="btn btn-default" ng-click="current_website = false">Cancelar</a>
+    </div>
+  </div>
+</div>

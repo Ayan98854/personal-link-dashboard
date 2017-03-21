@@ -14,10 +14,11 @@
 </head>
 <body>
 
-        <div id="wrapper" class="app">
+        <div id="wrapper" class="app" ng-app="PersonalDashboard" ng-controller="MainCtrl">
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -27,23 +28,29 @@
                     </button>
                     <a class="navbar-brand">SB Admin v2.0</a>
                 </div>
-                <!-- /.navbar-header -->
 
                 <ul class="nav nav-tabs navbar-top-links navbar-left">
-                    <li v-for="open_menu in open_menus" >
-                        <a v-bind:href="'#' + open_menu.nome" data-toggle="tab">
+                    <li ng-repeat="open_menu in open_menus" >
+                        <a ng-href="{{ '#' + open_menu.nome}}" data-toggle="tab">
                             {{ open_menu.nome }}
-                            <span v-on:click="fecharMenu(open_menu)" class="fa fa-times"></span>
+                            <span ng-click="fecharMenu(open_menu)" class="fa fa-times"></span>
                         </a>
                     </li>
                 </ul>
-                <!-- /.navbar-top-links -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li href="#">
+                        <a class="config-button" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-cog fa-fw"></i>
+                        </a>
+                    </li>
+                </ul>
 
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li v-for="menu in menus">
-                                <a v-on:click="abrirMenu(menu)">
+                            <li ng-repeat="menu in menus">
+                                <a ng-click="abrirMenu(menu)">
                                     {{ menu.titulo }}
                                 </a>
                             </li>
@@ -58,29 +65,32 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
 
-                    <div class="tab-pane fade in active" v-for="open_menu in open_menus" v-bind:id="open_menu.nome">
-                        <webview   v-bind:style="{height: iframeHeight + 'px'}"
-                            class="iframe" v-bind:src="open_menu.url" disablewebsecurity></webview>
+                    <div class="tab-pane fade in active" ng-repeat="open_menu in open_menus" id="{{ open_menu.nome }}">
+                        <webview ng-style="{height: iframeHeight + 'px'}" partition="persist:personal-dashboard"
+                            class="iframe" src="{{ open_menu.url }}" disablewebsecurity></webview>
                     </div>
                 </div>
+            </div>
 
-                <div class="row"  v-if="iframeUrl == ''">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Dashboard</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
+            <div class="panel">
 
-                <div class="row"  v-else>
-                    <div class="col-lg-12">
-                        <webview   v-bind:style="{height: iframeHeight + 'px'}" id="main-iframe" v-bind:src="iframeUrl" disablewebsecurity></webview>
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Configurations</h4>
                     </div>
+                    <div class="modal-body">
+                      <p><configuracoes></configuracoes></p>
+                    </div>
+                  </div>
                 </div>
+              </div>
 
             </div>
 
         </div>
 
-</body>
+    </body>
 </html>
